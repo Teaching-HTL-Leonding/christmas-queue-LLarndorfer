@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 namespace ChristmasQueue.Collections;
 
 /// <summary>
@@ -50,8 +52,14 @@ public class ListOfStacks
     /// <param name="maxStackHeight">The maximum height of each stack in the list.</param>
     public ListOfStacks(int numberOfStacks, int maxStackHeight)
     {
-        // TODO: Add implementation
-        throw new NotImplementedException();
+        for (int i = 0; i < numberOfStacks; i++)
+        {
+            var node = new ListNode(maxStackHeight)
+            {
+                Next = First
+            };
+            First = node;
+        }
     }
 
     /// <summary>
@@ -61,8 +69,13 @@ public class ListOfStacks
     /// <returns>The stack at the specified index, or null if the index is out of range.</returns>
     public Stack? GetAt(int stackIndex)
     {
-        // TODO: Add implementation
-        throw new NotImplementedException();
+        var node = First;
+        for (int i = 0; i < stackIndex; i++)
+        {
+            node = node?.Next;
+        }
+        return node?.Stack;
+
     }
 
     /// <summary>
@@ -71,7 +84,14 @@ public class ListOfStacks
     /// <returns>True if all stacks are homogeneous; otherwise, false.</returns>
     public bool AreAllStacksHomogeneous()
     {
-        // TODO: Add implementation
-        throw new NotImplementedException();
+        for (var node = First; node != null; node = node.Next)
+        {
+            if (!node.Stack.IsHomogeneous())
+            {
+                return false;
+            }
+        }
+        return true;
+
     }
 }

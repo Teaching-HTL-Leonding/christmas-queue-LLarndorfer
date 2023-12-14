@@ -1,4 +1,7 @@
-﻿namespace ChristmasQueue.Collections;
+﻿using System.Runtime.InteropServices;
+using System.Transactions;
+
+namespace ChristmasQueue.Collections;
 
 /// <summary>
 /// Represents a node in a stack, holding the content and a reference to the next node.
@@ -18,7 +21,6 @@ internal class StackNode
     /// Gets or sets the next node in the stack.
     /// </summary>
     public StackNode? Next { get; set; }
-
     /// <summary>
     /// Initializes a new instance of the StackNode class with the specified content.
     /// </summary>
@@ -42,7 +44,9 @@ public class Stack
     /// Gets or sets the first node in the stack.
     /// </summary>
     private StackNode? First { get; set; }
-
+    public int? MaxHeight { get; set; }
+    public int? currHeight { get; set; } = 0;
+    
     /// <summary>
     /// Initializes a new instance of the Stack class with the specified maximum height.
     /// </summary>
@@ -53,8 +57,7 @@ public class Stack
     /// </remarks>
     public Stack(int maxHeight)
     {
-        // TODO: Add implementation
-        throw new NotImplementedException();
+        MaxHeight = maxHeight;
     }
 
     /// <summary>
@@ -64,8 +67,18 @@ public class Stack
     /// <returns>True if the item was successfully added; otherwise, false.</returns>
     public bool TryPush(string content)
     {
-        // TODO: Add implementation
-        throw new NotImplementedException();
+        if (!IsFull)
+        {
+            var node = new StackNode(content)
+            {
+                Next = First
+            };
+            First = node;
+            currHeight++;
+            return true;
+        }
+            return false;
+
     }
 
     /// <summary>
@@ -75,8 +88,14 @@ public class Stack
     /// <returns>True if the item was successfully removed; otherwise, false.</returns>
     public bool TryPop(out string content)
     {
-        // TODO: Add implementation
-        throw new NotImplementedException();
+        content = First?.Content;
+        if (!IsEmpty)
+        {
+            First = First?.Next;
+            currHeight--;
+            return true;
+        }
+        return false;
     }
 
     /// <summary>
@@ -86,23 +105,30 @@ public class Stack
     /// <returns>The content at the specified depth, or null if the depth exceeds the stack size.</returns>
     public string? Peek(int depth)
     {
-        // TODO: Add implementation
-        throw new NotImplementedException();
+        var temp = First;
+        for (int i = 0; i < depth; i++)
+        {
+            if (temp != null)
+            {
+                temp = temp.Next;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        return temp?.Content;
     }
 
     /// <summary>
     /// Gets a value indicating whether the stack is empty.
     /// </summary>
-    public bool IsEmpty => 
-        // TODO: Add implementation
-        throw new NotImplementedException();
+    public bool IsEmpty => First == null;
 
     /// <summary>
     /// Gets a value indicating whether the stack is full.
     /// </summary>
-    public bool IsFull => 
-        // TODO: Add implementation
-        throw new NotImplementedException();
+    public bool IsFull => currHeight == MaxHeight;
 
 
     /// <summary>
@@ -111,7 +137,14 @@ public class Stack
     /// <returns>True if all elements are the same, or the stack is empty; otherwise, false.</returns>
     public bool IsHomogeneous()
     {
-        // TODO: Add implementation
-        throw new NotImplementedException();
+
+        for (var temp = First; temp != null; temp = temp.Next)
+        {
+            if (temp.Content != First?.Content)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
