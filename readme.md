@@ -10,7 +10,7 @@ Learning about dynamic data structures like lists, stacks, or queues does not ne
 Want to try it? [Here you can try the finished game.](https://christmasqueue.z6.web.core.windows.net/?rows=4&columns=4)
 
 ## Tipps for Playing the Game
-
+d
 * If you start the game without query string parameters, you will get a 8 columns and 5 rows. Example URL: [https://christmasqueue.z6.web.core.windows.net/](https://christmasqueue.z6.web.core.windows.net/)
 * You can specify rows and columns in the URL. Example URL: [https://christmasqueue.z6.web.core.windows.net/?rows=4&columns=4](https://christmasqueue.z6.web.core.windows.net/?rows=4&columns=4)
 * Do you want to challenge a friend? In the right lower corner of the game, you can find a _seed_ value. By putting the seed value in the URL, other people can play the same game. You can compare the number of moves it took you to solve the game. Example URL: [https://christmasqueue.z6.web.core.windows.net/?rows=4&columns=4&seed=214450712](https://christmasqueue.z6.web.core.windows.net/?rows=4&columns=4&seed=214450712)
